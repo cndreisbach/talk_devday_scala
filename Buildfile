@@ -19,4 +19,9 @@ define 'devday' do
   
     compile.with renderer_jar, itext_jar, minium_jar
   end
+
+  desc 'Sinatra app to serve out PDFs from HTML'
+  define 'pdf_server' do
+
+  end
 end
