@@ -1,0 +1,62 @@
+/* http://www.colourlovers.com/palette/625987/dont_you_go_down */
+/*
+  bone: #EDEBE6
+  tan: #D6E1C7
+  aqua: #94C7B6
+  brown: #403B33
+  orange: #D3643B
+  */
+
+/*
+  blue: #2E95A3
+  medium blue: #50B8B4
+  light blue: #C6FFFA
+  light tan: #E2FFA8
+  tan: #D6E055
+  */
+
+@import url(s6/slides.css); /* required to make the slide show run at all */
+     
+html, body {
+    color: white;
+    background-color: #2E95A3;
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-family: Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif;
+}
+
+.presentation {
+    font-size: 150%;
+}
+
+a:link, a:visited { color: white; }
+
+h1, h2 {
+        font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h1 { font-size: 2em; }
+h2 { font-size: 1.5em; }
+h3 { font-size: 1.25em; }
+
+pre {
+    font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+    }
+
+pre.code { 
+    background-color: #E2FFA8;
+    color: black;
+    padding: 10px;
+    -moz-border-radius: 10px;
+}
+      
+div#header, div#footer {  color: silver; }
+
+#currentSlide { color: silver;}
+
+#controls #navLinks a { color: silver; }
+
+.step { color: gray; }
+/* or hide next steps e.g.  .step { visibility: hidden; } */
+.stepcurrent { color: yellow; }
+
+<%= content_for :css %>

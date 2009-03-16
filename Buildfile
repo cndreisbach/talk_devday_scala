@@ -11,11 +11,11 @@ define 'devday' do
     fs_url = 'http://pigeonholdings.com/projects/flyingsaucer/downloads/r8/flyingsaucer-R8rc1.zip'
     fs_zip = download(_('target/fs.zip')=>fs_url)
     renderer_jar = file(_('target/fs/core-renderer.jar') => 
-                        unzip(_('target/xhtml_renderer')=>fs_zip))
+                        unzip(_('target/fs')=>fs_zip))
     itext_jar = file(_('target/fs/iText-2.0.8.jar') =>
-                     unzip(_('target/xhtml_renderer')=>fs_zip))
+                     unzip(_('target/fs')=>fs_zip))
     minium_jar = file(_('target/fs/minium.jar') => 
-                      unzip(_('target/xhtml_renderer')=>fs_zip))
+                      unzip(_('target/fs')=>fs_zip))
   
     compile.with renderer_jar, itext_jar, minium_jar
   end
