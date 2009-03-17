@@ -1,5 +1,6 @@
 require 'buildr'
 require 'buildr/scala'
+require 'slideshow'
 
 desc 'Developer Day'
 define 'devday' do
@@ -23,5 +24,12 @@ define 'devday' do
   desc 'Sinatra app to serve out PDFs from HTML'
   define 'pdf_server' do
 
+  end
+  
+  desc 'Presentation'
+  define 'presentation' do
+    task 'build' do
+      Slideshow::Gen.new.run(['-t', _('template/s6.txt'), '-o', _('slides'), _('scala.textile')])
+    end
   end
 end
