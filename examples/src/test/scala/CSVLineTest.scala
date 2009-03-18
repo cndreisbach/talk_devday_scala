@@ -1,13 +1,9 @@
-import org.scalatest.prop.PropSuite
-import org.scalacheck._
+import org.scalatest._
 
-class CSVLineTest extends PropSuite {
+class CSVLineTest extends FunSuite {
   test("A CSVLine should split up a string") {
-    check(
-      (strings: List[String]) => {
-        val csvline = new CSVLine(strings.reduceLeft((a, b) => a + "," + b))
-        csvline.size == strings.size
-      }
-    )
+    val strings = List("a", "b", "c")
+    val csvline = new CSVLine(strings.reduceLeft((a, b) => a + "," + b))
+    csvline.size == strings.size
   }
 }

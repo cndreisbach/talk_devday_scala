@@ -9,10 +9,13 @@ define 'devday' do
 
   repositories.remote << 'http://www.ibiblio.org/maven2'
   repositories.remote << "http://scala-tools.org/repo-releases"
+  repositories.remote << "http://www.familie-kneissl.org/repo-releases"
 
   SCALATEST = { :group => 'org.scala-tools.testing', :id => 'scalatest', :version => '0.9.5' }
   SCALACHECK = { :group => 'org.scala-tools.testing', :id => 'scalacheck', :version => '1.5' }
   SPECS = { :group => 'org.scala-tools.testing', :id => 'specs', :version => '1.4.3' }
+  VELOCITY = 'org.apache.velocity:velocity:jar:1.6.1'
+  SCALA_VELOCITY = 'eu.mkneissl:scala-velocity:jar:0.8.0'
   
   desc 'Scala API for Flying Saucer'
   define 'pdf_maker' do
@@ -40,7 +43,7 @@ define 'devday' do
   
   desc 'slider'
   define 'slider' do
-    compile.with SCALATEST, SCALACHECK
+    compile.with VELOCITY, SCALA_VELOCITY, SCALATEST, SCALACHECK
   end
   
   desc 'Presentation'
