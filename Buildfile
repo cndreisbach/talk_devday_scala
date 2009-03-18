@@ -7,12 +7,13 @@ define 'devday' do
   project.version = '0.1'
   project.group = 'Clinton R. Nixon'
 
-  repositories.remote << 'http://www.ibiblio.org/maven2/'
+  repositories.remote << 'http://www.ibiblio.org/maven2'
   repositories.remote << "http://scala-tools.org/repo-releases"
 
   SCALATEST = { :group => 'org.scala-tools.testing', :id => 'scalatest', :version => '0.9.5' }
   SCALACHECK = { :group => 'org.scala-tools.testing', :id => 'scalacheck', :version => '1.5' }
-
+  SPECS = { :group => 'org.scala-tools.testing', :id => 'specs', :version => '1.4.3' }
+  
   desc 'Scala API for Flying Saucer'
   define 'pdf_maker' do
     fs_url = 'http://pigeonholdings.com/projects/flyingsaucer/downloads/r8/flyingsaucer-R8rc1.zip'
@@ -34,8 +35,7 @@ define 'devday' do
 
   desc 'Examples for presentation'
   define 'examples' do
-
-    compile.with SCALATEST
+    compile.with SPECS, SCALACHECK
   end
   
   desc 'Presentation'
