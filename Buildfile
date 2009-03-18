@@ -35,7 +35,12 @@ define 'devday' do
 
   desc 'Examples for presentation'
   define 'examples' do
-    compile.with SPECS, SCALACHECK
+    compile.with SCALATEST, SCALACHECK
+  end
+  
+  desc 'slider'
+  define 'slider' do
+    compile.with SCALATEST, SCALACHECK
   end
   
   desc 'Presentation'
@@ -43,18 +48,33 @@ define 'devday' do
     task 'build' do
       module Slideshow
         class Gen
-          def highlight( lang, &blk )        
-            content = capture_erb(&blk)
-            return if content.empty?
-            concat_erb( format_code( content, lang ), blk.binding )
+          def highlight( lang_or_file, &blk )
+            if block_given?
+              content = capture_erb(&blk)
+              return if content.empty?
+              concat_erb( format_code(content, lang_or_file), blk.binding )
+            else
+              format_code(lang_or_file)
+            end
           end
 
-          def format_code(content, lang)
-            IO.popen("pygmentize -f html -l #{lang}", "r+") do |pyg|
-              pyg.write content
+          def format_code(content, lang = nil)
+            cmd = "pygmentize -f html "
+            if lang
+              cmd += "-l #{lang} "
+            else
+              cmd += content
+            end
+            
+            IO.popen(cmd, "r+") do |pyg|
+              pyg.write content unless lang.nil?
               pyg.close_write
               pyg.readlines.join('')
             end
+          end
+          
+          def example(*ex)
+            File.join(File.dirname(__FILE__), 'examples', 'src', 'main', 'scala', *ex)
           end
         end
       end

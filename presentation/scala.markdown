@@ -6,7 +6,7 @@ Clinton R. Nixon
 
 Viget Labs
 
-# The deal with Scala
+# What's Scala?
 
 * Created in 2001 by Martin Odersky
 * Runs on the JVM
@@ -65,9 +65,14 @@ Most of Scala isn't jarring.
 
 # Type inference
 
-<% highlight 'scala' do %>
+<%= highlight example('CSVLine.scala') %>
 
-<% end %>
+# To make my own slideshow program
+
+* Textile or Markdown (Xilize)
+* Templating (http://www.familie-kneissl.org/Members/martin/blog/a-scala-wrapper-for-apache-velocity/view)
+* Syntax highlighting (use JavaScript?)
+* Option parser
 
 # Outline
 

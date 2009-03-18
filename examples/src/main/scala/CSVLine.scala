@@ -6,4 +6,8 @@ class CSVLine(line: String) {
   def apply(idx: Int) = {
     elements(idx)
   }
+  
+  def print {
+    println(line)
+  }
 }
