@@ -30,14 +30,13 @@ class Slideshow(filename: String) {
     writer.toString
   }
 
-  # TODO fix so that {basename} works
   def toXML = {
     <html>
       <head>
         <title>{ title }</title>
         <meta name="defaultView" content="slideshow"/>
         <link rel="stylesheet" 
-              href="{ basename }.css" 
+              href={ basename + ".css" }
               type="text/css" media="projection" id="slideProj"/>
         <link rel="stylesheet" 
               href="s6/outline.css" 

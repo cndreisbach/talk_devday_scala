@@ -1,6 +1,6 @@
 require 'buildr'
 require 'buildr/scala'
-require 'slideshow'
+include Java
 
 desc 'Developer Day'
 define 'devday' do
@@ -10,17 +10,6 @@ define 'devday' do
   repositories.remote << 'http://www.ibiblio.org/maven2'
   repositories.remote << "http://scala-tools.org/repo-releases"
   repositories.remote << "http://www.familie-kneissl.org/repo-releases"
-
-  SCALALIB = { :group => 'org.scala-lang', :id => 'scala-library', :version => '2.7.3' }
-  SCALATEST = { :group => 'org.scala-tools.testing', :id => 'scalatest', :version => '0.9.5' }
-  SCALACHECK = { :group => 'org.scala-tools.testing', :id => 'scalacheck', :version => '1.5' }
-  SPECS = { :group => 'org.scala-tools.testing', :id => 'specs', :version => '1.4.3' }
-  VELOCITY = { :group => 'org.apache.velocity', :id => 'velocity', :version => '1.6.1'}
-  SCALA_VELOCITY = { :group => 'eu.mkneissl', :id => 'scala-velocity', :version => '0.8.0' }
-  BEANSHELL_CORE = { :group => 'org.beanshell', :id => 'bsh-core', :version => '2.0b4' }
-  FLYING_SAUCER = { :group => 'org.xhtmlrenderer', :id => 'core-renderer', :version => 'R8pre2' }
-  MARKDOWNJ = { :group => 'org.markdownj', :id => 'markdownj', :version => '0.3.0-1.0.2b4' }
-  COMMONS_IO = { :group => 'commons-io', :id => 'commons-io', :version => '1.4' }
   
   desc 'Scala API for Flying Saucer'
   define 'pdf_maker' do
@@ -39,21 +28,48 @@ define 'devday' do
   
   desc 'slider'
   define 'slider' do    
-    compile.with VELOCITY, SCALA_VELOCITY, SCALATEST, SCALACHECK, MARKDOWNJ, COMMONS_IO
+    compile.with VELOCITY, SCALA_VELOCITY, MARKDOWNJ, COMMONS_IO
   end
   
   desc 'Presentation'
   define 'presentation' do
-    task 'build' do
-      # p project('slider').compile.dependencies[3].to_s
-      # TODO require this in Ruby, not call Java::Commands.java
+    task 'build' do   
+      load_dependencies
+      puts "Building presentation..."
+      slideshow = Java::Slideshow.new(_('scala.markdown'))
+      slideshow.save_file
       
+      # Java::Commands.java('Slider', _('scala.markdown'),
+      #   :classpath => [
+      #     project('slider').compile.dependencies, 
+      #     project('slider')._('target/classes') ]
+      # )
+    end
+    
+    def load_dependencies
       project('slider').task('compile').invoke
-      Java::Commands.java('Slider', _('scala.markdown'),
-        :classpath => [
-          project('slider').compile.dependencies, 
-          project('slider')._('target/classes') ]
-      )
+      
+      project('slider').compile.dependencies.each do |req|
+        require req.to_s
+      end
+      $:.push(project('slider')._('target/classes'))
+      
+      %w(OptionDefinition *OptionDefinition OptionParser Slide Slideshow Slider).each do |prefix|
+        Dir[project('slider')._("target/classes/#{prefix}*.class")].each do |java_class|
+          require File.basename(java_class, ".class")
+        end
+      end
     end
   end
+  
+  SCALALIB = { :group => 'org.scala-lang', :id => 'scala-library', :version => '2.7.3' }
+  SCALATEST = { :group => 'org.scala-tools.testing', :id => 'scalatest', :version => '0.9.5' }
+  SCALACHECK = { :group => 'org.scala-tools.testing', :id => 'scalacheck', :version => '1.5' }
+  SPECS = { :group => 'org.scala-tools.testing', :id => 'specs', :version => '1.4.3' }
+  VELOCITY = { :group => 'org.apache.velocity', :id => 'velocity', :version => '1.6.1'}
+  SCALA_VELOCITY = { :group => 'eu.mkneissl', :id => 'scala-velocity', :version => '0.8.0' }
+  BEANSHELL_CORE = { :group => 'org.beanshell', :id => 'bsh-core', :version => '2.0b4' }
+  FLYING_SAUCER = { :group => 'org.xhtmlrenderer', :id => 'core-renderer', :version => 'R8pre2' }
+  MARKDOWNJ = { :group => 'org.markdownj', :id => 'markdownj', :version => '0.3.0-1.0.2b4' }
+  COMMONS_IO = { :group => 'commons-io', :id => 'commons-io', :version => '1.4' }
 end
