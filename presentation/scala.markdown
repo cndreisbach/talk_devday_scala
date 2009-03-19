@@ -20,21 +20,21 @@ Viget Labs
 
 # Hello world
 
-<% highlight 'scala' do %>
+<pre class="code">
 object HelloWorld extends Application {
   println("Hello world")
 }
-<% end %>
+</pre>
 
 ## Java-style
 
-<% highlight 'scala' do %>
+<pre class="code">
 object HelloWorld {
   def main(args: Array[String]) {
     println("Hello world")
   }
 }
-<% end %>
+</pre>
 
 ---
 
@@ -75,16 +75,7 @@ Most of Scala isn't jarring.
 
 # Type inference
 
-<%= highlight example('CSVLine.scala') %>
-
----
-
-# To make my own slideshow program
-
-* Textile or Markdown (Xilize)
-* Templating (http://www.familie-kneissl.org/Members/martin/blog/a-scala-wrapper-for-apache-velocity/view)
-* Syntax highlighting (use JavaScript?)
-* Option parser
+<pre src="../examples/src/main/scala/CSVLine.scala" />
 
 ---
 

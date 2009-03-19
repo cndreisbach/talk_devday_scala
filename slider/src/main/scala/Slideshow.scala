@@ -8,7 +8,7 @@ class Slideshow(filename: String) {
   val basename = FilenameUtils.getBaseName(filename)
   val path = FilenameUtils.getFullPath(filename)
   val slideText = Source.fromFile(filename).getLines.toList.reduceLeft((a, b) => a + b)
-  val slides = slideText.split("[\r\n]+---+[\r\n]+").map((text) => new Slide(text))
+  val slides = slideText.split("[\r\n]+---+[\r\n]+").map((text) => new Slide(this, text))
 
   val doctype = DocType("html", 
                         PublicID("-//W3C//DTD XHTML 1.0 Strict//EN",
@@ -30,6 +30,7 @@ class Slideshow(filename: String) {
     writer.toString
   }
 
+  // TODO move extra css and JS out of here
   def toXML = {
     <html>
       <head>
