@@ -1,7 +1,7 @@
 object Slider {
   def create(filename: String) {
     val slideshow = new Slideshow(filename)
-    slideshow.saveFile()
+    slideshow.saveHTML()
   }
   
   def main(args: Array[String]) {

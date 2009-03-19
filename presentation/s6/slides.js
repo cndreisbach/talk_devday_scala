@@ -10,9 +10,15 @@
 
 $.ajaxSetup({async: false});
 $.getScript( 's6/slides.core.js' );
+$.getScript('scripts/shCore.js');
+$.getScript('scripts/shBrushScala.js');
 $.ajaxSetup({async: true});
 
 $(document).ready(function(){
+  $('head').append('<link rel="stylesheet" href="styles/shCore.css" />');
+  $('head').append('<link rel="stylesheet" href="styles/shThemeDefault.css" />');
+  SyntaxHighlighter.defaults['light'] = true;
+  SyntaxHighlighter.all();
         
   if( $.browser.msie )
         {

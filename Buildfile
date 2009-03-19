@@ -7,6 +7,11 @@ define 'devday' do
   project.version = '0.1'
   project.group = 'Clinton R. Nixon'
 
+  desc 'Scala API for Flying Saucer'
+  define 'pdf_maker' do
+    compile.with FLYING_SAUCER
+  end
+
   desc 'Examples for presentation'
   define 'examples' do
     compile.with SCALATEST, SCALACHECK
@@ -14,7 +19,7 @@ define 'devday' do
   
   desc 'slider'
   define 'slider' do
-    compile.with MARKDOWNJ, COMMONS_IO
+    compile.with MARKDOWNJ, COMMONS_IO, FLYING_SAUCER, project('pdf_maker')
   end
   
   desc 'Presentation'
@@ -23,13 +28,20 @@ define 'devday' do
       load_dependencies
       puts "Building presentation..."
       slideshow = Java::Slideshow.new(_('scala.markdown'))
-      slideshow.save_file
+      slideshow.save_html
       
       # Java::Commands.java('Slider', _('scala.markdown'),
       #   :classpath => [
       #     project('slider').compile.dependencies, 
       #     project('slider')._('target/classes') ]
       # )
+    end
+
+    task 'pdf' do
+      load_dependencies
+      puts "Building presentation PDF..."
+      slideshow = Java::Slideshow.new(_('scala.markdown'))
+      slideshow.save_pdf
     end
     
     def load_dependencies
@@ -39,18 +51,14 @@ define 'devday' do
         require req.to_s
       end
       $:.push(project('slider')._('target/classes'))
+      $:.push(project('pdf_maker')._('target/classes'))
       
-      %w(OptionDefinition *OptionDefinition OptionParser Slide Slideshow Slider).each do |prefix|
+      %w(OptionDefinition *OptionDefinition OptionParser Slide Slideshow Slider PDFMaker).each do |prefix|
         Dir[project('slider')._("target/classes/#{prefix}*.class")].each do |java_class|
           require File.basename(java_class, ".class")
         end
       end
     end
-  end
-
-  desc 'Scala API for Flying Saucer'
-  define 'pdf_maker' do
-    compile.with FLYING_SAUCER
   end
 
   repositories.remote << 'http://www.ibiblio.org/maven2'
@@ -62,6 +70,7 @@ define 'devday' do
   SCALACHECK = { :group => 'org.scala-tools.testing', :id => 'scalacheck', :version => '1.5' }
   SPECS = { :group => 'org.scala-tools.testing', :id => 'specs', :version => '1.4.3' }
   FLYING_SAUCER = { :group => 'org.xhtmlrenderer', :id => 'core-renderer', :version => 'R8pre2' }
+  ITEXT = { :group => 'com.lowagie', :id => 'itext', :version => '2.0.8' }
   COMMONS_IO = { :group => 'commons-io', :id => 'commons-io', :version => '1.4' }
   MARKDOWNJ = { :group => 'org.markdownj', :id => 'markdownj', :version => '0.3.0-1.0.2b4' }
 end

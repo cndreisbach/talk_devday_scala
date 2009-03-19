@@ -20,21 +20,7 @@ Viget Labs
 
 # Hello world
 
-<pre class="code">
-object HelloWorld extends Application {
-  println("Hello world")
-}
-</pre>
-
-## Java-style
-
-<pre class="code">
-object HelloWorld {
-  def main(args: Array[String]) {
-    println("Hello world")
-  }
-}
-</pre>
+<pre class="code brush:scala" src="../examples/src/main/scala/HiThere.scala" />
 
 ---
 
@@ -75,37 +61,53 @@ Most of Scala isn't jarring.
 
 # Type inference
 
-<pre src="../examples/src/main/scala/CSVLine.scala" />
+<pre class="brush:scala" src="../examples/src/main/scala/CSVLine.scala" />
+
+Only non-obvious cases need explicit typing.
 
 ---
 
-# Outline
+# Type inference doesn't work with recursion
 
-* What does type inference mean?
-* What are the features of functional programming in Scala?
-  * Anonymous, first-class functions
-  * Nested functions
-  * Tail recursion
-  * Immutability
-  * Lists
-  + Currying
-  + For comprehensions
-  + Lazy values
-* What are the features of object-oriented programming in Scala?
-  * Classes and instances
-  * Stand-alone objects
-  * Companion objects
-  * Selective mutability
-  * Parameter-less methods
-  * Abstract classes
-  * Traits
-  * No primitives
-  + Generics
+<pre class="brush:scala" src="../slider/src/main/scala/Slide.scala" section="recursive" />
+
+---
+
+# Scala is a functional language
+
+* Immutability
+* Anonymous, first-class functions
+* Nested functions
+* Tail recursion
+* Lists
+* Pattern matching
++ Currying
++ For comprehensions
++ Lazy values
+
+---
+
+# Scala is an object-oriented language
+
+* Classes and instances
+* Stand-alone objects
+* Companion objects
+* Selective mutability
+* Parameter-less methods
+* Abstract classes
+* Traits
+* No primitives
++ Generics
+
+---
+
+# Other topics
+
 * How does Scala interact with other JVM languages?
+* XML Literals
 + What is ScalaCheck?
 * Why is Scala good for writing DSLs? (df format now)
 + What are case classes?
-+ What is pattern matching?
 + What is combinator parsing?
 * What are actors and messages?
 * How do actors and messages help with concurrency?
