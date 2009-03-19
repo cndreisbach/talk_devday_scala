@@ -11,6 +11,7 @@ define 'devday' do
   repositories.remote << "http://scala-tools.org/repo-releases"
   repositories.remote << "http://www.familie-kneissl.org/repo-releases"
 
+  SCALALIB = { :group => 'org.scala-lang', :id => 'scala-library', :version => '2.7.3' }
   SCALATEST = { :group => 'org.scala-tools.testing', :id => 'scalatest', :version => '0.9.5' }
   SCALACHECK = { :group => 'org.scala-tools.testing', :id => 'scalacheck', :version => '1.5' }
   SPECS = { :group => 'org.scala-tools.testing', :id => 'specs', :version => '1.4.3' }
@@ -44,42 +45,15 @@ define 'devday' do
   desc 'Presentation'
   define 'presentation' do
     task 'build' do
-      module Slideshow
-        class Gen
-          def highlight( lang_or_file, &blk )
-            if block_given?
-              content = capture_erb(&blk)
-              return if content.empty?
-              concat_erb( format_code(content, lang_or_file), blk.binding )
-            else
-              format_code(lang_or_file)
-            end
-          end
-
-          def format_code(content, lang = nil)
-            cmd = "pygmentize -f html "
-            if lang
-              cmd += "-l #{lang} "
-            else
-              cmd += content
-            end
-            
-            IO.popen(cmd, "r+") do |pyg|
-              pyg.write content unless lang.nil?
-              pyg.close_write
-              pyg.readlines.join('')
-            end
-          end
-          
-          def example(*ex)
-            File.join(File.dirname(__FILE__), 'examples', 'src', 'main', 'scala', *ex)
-          end
-        end
-      end
+      # p project('slider').compile.dependencies[3].to_s
+      # TODO require this in Ruby, not call Java::Commands.java
       
-      Slideshow::Gen.new.run(['-t', _('template/s6.txt'),
-                              '-o', _('slides'),
-                              _('scala.markdown')])
+      project('slider').task('compile').invoke
+      Java::Commands.java('Slider', _('scala.markdown'),
+        :classpath => [
+          project('slider').compile.dependencies, 
+          project('slider')._('target/classes') ]
+      )
     end
   end
 end

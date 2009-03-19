@@ -1,10 +1,10 @@
-title: Scala: A Modern Language
-
 # Scala: A Modern Language
 
 Clinton R. Nixon
 
 Viget Labs
+
+---
 
 # What's Scala?
 
@@ -15,6 +15,8 @@ Viget Labs
 * Compiled beforehand or just-in-time
 * Static typing with inference
 * Actor-based concurrency
+
+---
 
 # Hello world
 
@@ -34,6 +36,8 @@ object HelloWorld {
 }
 <% end %>
 
+---
+
 # Why am I interested in Scala?
 
 ## I'm a Javan:
@@ -43,6 +47,8 @@ object HelloWorld {
 * I want something more high-level, but don't want to sacrifice speed or static typing.
 * Writing concurrent Java code makes me want to break albums of Beethoven
 across the back of the john
+
+---
 
 # Why am I interested in Scala?
 
@@ -54,6 +60,8 @@ across the back of the john
   * I want to not scream
 * By definition, I'm a developer that likes emerging technologies, and I want to learn something new
 
+---
+
 # What is different about Scala?
 
 Most of Scala isn't jarring.
@@ -63,9 +71,13 @@ Most of Scala isn't jarring.
 * Syntax is close to what you're used to, but not close enough
 * Relies on another language (Java) for much of its standard library
 
+---
+
 # Type inference
 
 <%= highlight example('CSVLine.scala') %>
+
+---
 
 # To make my own slideshow program
 
@@ -73,6 +85,8 @@ Most of Scala isn't jarring.
 * Templating (http://www.familie-kneissl.org/Members/martin/blog/a-scala-wrapper-for-apache-velocity/view)
 * Syntax highlighting (use JavaScript?)
 * Option parser
+
+---
 
 # Outline
 

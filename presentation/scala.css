@@ -125,5 +125,5 @@ pre.code, .hll, .highlight {
 .il { color: #0000D0; font-weight: bold } /* Literal.Number.Integer.Long */
 
 
-<%= content_for :css %>
+
 

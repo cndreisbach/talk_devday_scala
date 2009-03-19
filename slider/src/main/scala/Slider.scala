@@ -1,4 +1,9 @@
 object Slider {
+  def create(filename: String) {
+    val slideshow = new Slideshow(filename)
+    slideshow.saveFile()
+  }
+  
   def main(args: Array[String]) {
     var concurrent = false
 
