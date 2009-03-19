@@ -14,21 +14,15 @@ define 'devday' do
   SCALATEST = { :group => 'org.scala-tools.testing', :id => 'scalatest', :version => '0.9.5' }
   SCALACHECK = { :group => 'org.scala-tools.testing', :id => 'scalacheck', :version => '1.5' }
   SPECS = { :group => 'org.scala-tools.testing', :id => 'specs', :version => '1.4.3' }
-  VELOCITY = 'org.apache.velocity:velocity:jar:1.6.1'
-  SCALA_VELOCITY = 'eu.mkneissl:scala-velocity:jar:0.8.0'
+  VELOCITY = { :group => 'org.apache.velocity', :id => 'velocity', :version => '1.6.1'}
+  SCALA_VELOCITY = { :group => 'eu.mkneissl', :id => 'scala-velocity', :version => '0.8.0' }
+  BEANSHELL_CORE = { :group => 'org.beanshell', :id => 'bsh-core', :version => '2.0b4' }
+  FLYING_SAUCER = { :group => 'org.xhtmlrenderer', :id => 'core-renderer', :version => 'R8pre2' }
+  MARKDOWNJ = { :group => 'org.markdownj', :id => 'markdownj', :version => '0.3.0-1.0.2b4' }
   
   desc 'Scala API for Flying Saucer'
   define 'pdf_maker' do
-    fs_url = 'http://pigeonholdings.com/projects/flyingsaucer/downloads/r8/flyingsaucer-R8rc1.zip'
-    fs_zip = download(_('target/fs.zip')=>fs_url)
-    renderer_jar = file(_('target/fs/core-renderer.jar') => 
-                        unzip(_('target/fs')=>fs_zip))
-    itext_jar = file(_('target/fs/iText-2.0.8.jar') =>
-                     unzip(_('target/fs')=>fs_zip))
-    minium_jar = file(_('target/fs/minium.jar') => 
-                      unzip(_('target/fs')=>fs_zip))
-  
-    compile.with renderer_jar, itext_jar, minium_jar
+    compile.with FLYING_SAUCER
   end
 
   desc 'Sinatra app to serve out PDFs from HTML'
@@ -42,8 +36,8 @@ define 'devday' do
   end
   
   desc 'slider'
-  define 'slider' do
-    compile.with VELOCITY, SCALA_VELOCITY, SCALATEST, SCALACHECK
+  define 'slider' do    
+    compile.with VELOCITY, SCALA_VELOCITY, SCALATEST, SCALACHECK, MARKDOWNJ
   end
   
   desc 'Presentation'

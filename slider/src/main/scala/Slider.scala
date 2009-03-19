@@ -15,9 +15,10 @@ object Slider {
     opts.help("-h", "--help")
     val leftoverArgs = opts.parse(args)
     
-    if (leftoverArgs.size != 1)
+    if (leftoverArgs.size != 1) {
       opts.showUsage
-    else
-      println(leftoverArgs(0))
+    } else {
+      println(new Slideshow(leftoverArgs(0)))
+    }
   }
 }
