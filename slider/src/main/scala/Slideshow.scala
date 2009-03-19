@@ -4,10 +4,9 @@ import scala.xml.XML
 import scala.xml.dtd._
 
 class Slideshow(filename: String) {
-  val file = new File(filename)
-  val fileSrc = Source.fromFile(file) 
-  val slideText = fileSrc.getLines.toList.reduceLeft((a, b) => a + b)
+  val slideText = Source.fromFile(filename).getLines.toList.reduceLeft((a, b) => a + b)
   val slides = slideText.split("[\r\n]+---+[\r\n]+").map((text) => new Slide(text))
+
   val doctype = DocType("html", 
                         PublicID("-//W3C//DTD XHTML 1.0 Strict//EN",
                                  "http://www.w3.org/TR/xhtml1/DTD/strict.dtd"), Nil)
