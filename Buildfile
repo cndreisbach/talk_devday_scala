@@ -19,6 +19,7 @@ define 'devday' do
   BEANSHELL_CORE = { :group => 'org.beanshell', :id => 'bsh-core', :version => '2.0b4' }
   FLYING_SAUCER = { :group => 'org.xhtmlrenderer', :id => 'core-renderer', :version => 'R8pre2' }
   MARKDOWNJ = { :group => 'org.markdownj', :id => 'markdownj', :version => '0.3.0-1.0.2b4' }
+  COMMONS_IO = { :group => 'commons-io', :id => 'commons-io', :version => '1.4' }
   
   desc 'Scala API for Flying Saucer'
   define 'pdf_maker' do
@@ -37,7 +38,7 @@ define 'devday' do
   
   desc 'slider'
   define 'slider' do    
-    compile.with VELOCITY, SCALA_VELOCITY, SCALATEST, SCALACHECK, MARKDOWNJ
+    compile.with VELOCITY, SCALA_VELOCITY, SCALATEST, SCALACHECK, MARKDOWNJ, COMMONS_IO
   end
   
   desc 'Presentation'
