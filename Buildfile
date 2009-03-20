@@ -32,13 +32,11 @@ define 'devday' do
     
     def load_dependencies
       project('slider').task('compile').invoke
-
-      project('slider').compile.dependencies.each do |req|
-        require req.to_s
-      end
+      project('slider').compile.dependencies.each { |req| require req.to_s }
       $:.push(project('slider')._('target/classes'))
       
-      %w(OptionDefinition *OptionDefinition OptionParser Slide Slideshow Slider PDFMaker).each do |prefix|
+      %w(OptionDefinition *OptionDefinition OptionParser 
+          Slide Slideshow Slider PDFMaker).each do |prefix|
         Dir[project('slider')._("target/classes/#{prefix}*.class")].each do |java_class|
           require File.basename(java_class, ".class")
         end
