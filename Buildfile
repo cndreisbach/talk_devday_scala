@@ -7,19 +7,14 @@ define 'devday' do
   project.version = '0.1'
   project.group = 'Clinton R. Nixon'
 
-  desc 'Scala API for Flying Saucer'
-  define 'pdf_maker' do
-    compile.with FLYING_SAUCER
-  end
-
   desc 'Examples for presentation'
   define 'examples' do
     compile.with SCALATEST, SCALACHECK
   end
   
-  desc 'slider'
+  desc 'Slideshow creator'
   define 'slider' do
-    compile.with MARKDOWNJ, COMMONS_IO, FLYING_SAUCER, project('pdf_maker')
+    compile.with MARKDOWNJ, COMMONS_IO, FLYING_SAUCER, ITEXT
   end
   
   desc 'Presentation'
@@ -29,12 +24,6 @@ define 'devday' do
       puts "Building presentation..."
       slideshow = Java::Slideshow.new(_('scala.markdown'))
       slideshow.save_html
-      
-      # Java::Commands.java('Slider', _('scala.markdown'),
-      #   :classpath => [
-      #     project('slider').compile.dependencies, 
-      #     project('slider')._('target/classes') ]
-      # )
     end
 
     task 'pdf' do
@@ -51,7 +40,6 @@ define 'devday' do
         require req.to_s
       end
       $:.push(project('slider')._('target/classes'))
-      $:.push(project('pdf_maker')._('target/classes'))
       
       %w(OptionDefinition *OptionDefinition OptionParser Slide Slideshow Slider PDFMaker).each do |prefix|
         Dir[project('slider')._("target/classes/#{prefix}*.class")].each do |java_class|

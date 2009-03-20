@@ -2,6 +2,7 @@ import java.io._
 import scala.io.Source
 import scala.collection.mutable.ArrayStack
 import org.xhtmlrenderer.pdf.ITextRenderer
+import com.lowagie.text._
 import javax.xml.parsers.{DocumentBuilder,DocumentBuilderFactory}
 
 object PDFMaker {
