@@ -1,6 +1,6 @@
 import java.io._
 import scala.io.Source
-import scala.xml.XML
+import scala.xml._
 import scala.xml.dtd._
 import org.apache.commons.io.FilenameUtils
 import javax.xml.parsers.{DocumentBuilder,DocumentBuilderFactory}
@@ -20,7 +20,7 @@ class Slideshow(filename: String) {
   def title = (slides(0).toXML \ "h1").text
 
   def saveHTML() {
-    scala.xml.XML.saveFull(htmlFilename, toXML, "UTF-8", true, doctype)
+    scala.xml.XML.saveFull(htmlFilename, toHTML, "UTF-8", true, doctype)
   }
 
   def savePDF() {
@@ -29,44 +29,65 @@ class Slideshow(filename: String) {
   }
   
   override def toString = {
-    val writer = new StringWriter
-    scala.xml.XML.write(writer, toXML, "UTF-8", true, doctype)
-    writer.toString
+    toXML.toString
   }
 
-  // TODO move extra css and JS out of here
   def toXML = {
-    <html>
-      <head>
-        <title>{ title }</title>
-        <meta name="defaultView" content="slideshow"/>
-        <link rel="stylesheet" 
-              href={ basename + ".css" }
-              type="text/css" media="projection" id="slideProj"/>
-        <link rel="stylesheet" 
-              href="s6/outline.css" 
-              type="text/css" media="screen" id="outlineStyle"/>
-        <link rel="stylesheet" 
-              href="s6/print.css" 
-              type="text/css" media="print" id="slidePrint"/>
-        <script src="s6/jquery.js" type="text/javascript"></script>
-        <script src="s6/slides.js" type="text/javascript"></script>
-      </head>
-      <body>
-        <div class="layout">
-          <div id="controls"><!-- DO NOT EDIT --></div>
-          <div id="currentSlide"><!-- DO NOT EDIT --></div>
-          <div id="header"></div>
-          <div id="footer">
-            <h1></h1>
-            <h2></h2>
-          </div>
-        </div>
+    <slideshow>
+      <title>{ title }</title>
+      <slides>
+        { slides.map((slide) => slide.toXML) }
+      </slides>
+    </slideshow>
+  }
 
-        <div class="presentation">{
-          slides.map((slide) => slide.toXML)
-        }</div>
-      </body>
-    </html>
+  def toHTML = {
+    convertXMLtoHTML(toXML)
+  }
+
+  private def convertXMLtoHTML(xml: Node): Node = {
+    xml match {
+      case <slideshow>{ c @ _ * }</slideshow> =>
+        <html>
+          { c.map((child) => convertXMLtoHTML(child)) }
+        </html>
+      case <title>{ title }</title> =>
+        <head>
+          <title>{ title }</title>
+          <meta name="defaultView" content="slideshow"/>
+          <link rel="stylesheet" 
+                href={ basename + ".css" }
+                type="text/css" media="projection" id="slideProj"/>
+          <link rel="stylesheet" 
+                href="s6/outline.css" 
+                type="text/css" media="screen" id="outlineStyle"/>
+          <link rel="stylesheet" 
+                href="s6/print.css" 
+                type="text/css" media="print" id="slidePrint"/>
+          <script src="s6/jquery.js" type="text/javascript"></script>
+          <script src="s6/slides.js" type="text/javascript"></script>
+        </head>
+      case <slides>{ c @ _ * }</slides> =>
+        <body>
+          <div class="layout">
+            <div id="controls"><!-- DO NOT EDIT --></div>
+            <div id="currentSlide"><!-- DO NOT EDIT --></div>
+            <div id="header"></div>
+            <div id="footer">
+              <h1></h1>
+              <h2></h2>
+            </div>
+          </div>
+
+          <div class="presentation">
+            { c.map((child) => convertXMLtoHTML(child)) }
+          </div>
+        </body>
+      case <slide>{ slide }</slide> => 
+        <div class="slide">
+          { slide }
+        </div>
+      case _ => xml
+    }
   }
 }
