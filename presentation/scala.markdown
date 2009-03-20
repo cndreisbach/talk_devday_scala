@@ -20,7 +20,7 @@ Viget Labs
 
 # Hello world
 
-<pre class="code brush:scala" src="../examples/src/main/scala/HiThere.scala" />
+<pre class="code brush:scala" src="src/main/scala/HiThere.scala" />
 
 ---
 
@@ -61,7 +61,7 @@ Most of Scala isn't jarring.
 
 # Type inference
 
-<pre class="brush:scala" src="../examples/src/main/scala/CSVLine.scala" />
+<pre class="brush:scala" src="src/main/scala/CSVLine.scala" />
 
 Only non-obvious cases need explicit typing.
 

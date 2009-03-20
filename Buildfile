@@ -7,11 +7,6 @@ define 'devday' do
   project.version = '0.1'
   project.group = 'Clinton R. Nixon'
 
-  desc 'Examples for presentation'
-  define 'examples' do
-    compile.with SCALATEST, SCALACHECK
-  end
-  
   desc 'Slideshow creator'
   define 'slider' do
     compile.with MARKDOWNJ, COMMONS_IO, FLYING_SAUCER, ITEXT
@@ -19,13 +14,15 @@ define 'devday' do
   
   desc 'Presentation'
   define 'presentation' do
-    task 'build' do   
+    compile.with SCALATEST, SCALACHECK
+
+    build do
       load_dependencies
       puts "Building presentation..."
       slideshow = Java::Slideshow.new(_('scala.markdown'))
       slideshow.save_html
     end
-
+    
     task 'pdf' do
       load_dependencies
       puts "Building presentation PDF..."
