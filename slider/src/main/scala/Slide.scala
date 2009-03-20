@@ -11,9 +11,8 @@ class Slide(slideshow: Slideshow, text: String) {
       XML.loadString("<div class='slide'>" + mdProc.markdown(text) + "</div>"))
   }
 
-  // START recursive
-  // Note the type declaration for this method.
   private def processDirectives(slideXML: Node): Node = {
+    // START matching
     slideXML match {
       case <pre /> => 
         includeCode(slideXML)
@@ -25,13 +24,13 @@ class Slide(slideshow: Slideshow, text: String) {
              c.map((child) => processDirectives(child)): _*) // recursive
       case _ => slideXML
     }
+    // END matching
   }
-  // END recursive
 
   private def includeCode(code: Node) = {
-    val src = code.attribute("src")
-    val section = code.attribute("section")
-    <pre class={codeClass(code.attribute("class"))}>{ codeText(src, section) }</pre>
+    val src = code attribute "src"
+    val section = code attribute "section"
+    <pre class={codeClass(code attribute "class")}>{ codeText(src, section) }</pre>
   }
 
   private def codeClass(htmlClass: Option[Seq[Node]]) = {

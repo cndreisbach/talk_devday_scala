@@ -5,27 +5,31 @@ import scala.xml.dtd._
 import org.apache.commons.io.FilenameUtils
 import javax.xml.parsers.{DocumentBuilder,DocumentBuilderFactory}
 
-class Slideshow(filename: String) {
-  val basename = FilenameUtils.getBaseName(filename)
-  val path = FilenameUtils.getFullPath(filename)
-  val htmlFilename = FilenameUtils.concat(path, basename + ".html")
-  val pdfFilename = FilenameUtils.concat(path, basename + ".pdf")
-  val slideText = Source.fromFile(filename).getLines.toList.reduceLeft((a, b) => a + b)
-  val slides = slideText.split("[\r\n]+---+[\r\n]+").map((text) => new Slide(this, text))
+class Slideshow(file: String) {
+  // START immutability
+  val basename = FilenameUtils.getBaseName(file)
+  val path = FilenameUtils.getFullPath(file)
+  // END immutability
+  val slideText = Source.fromFile(file).getLines.toList.reduceLeft((a, b) => a + b)
+  // START functions
+  val slides = slideText.split("[\r\n]+---+[\r\n]+").map(
+    (text) => new Slide(this, text))
+  // END functions
 
   val doctype = DocType("html", 
                         PublicID("-//W3C//DTD XHTML 1.0 Strict//EN",
                                  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"), Nil)
 
+  def filename(ext: String) = FilenameUtils.concat(path, basename + "." + ext)
   def title = (slides(0).toXML \ "h1").text
 
   def saveHTML() {
-    scala.xml.XML.saveFull(htmlFilename, toHTML, "UTF-8", true, doctype)
+    scala.xml.XML.saveFull(filename("html"), toHTML, "UTF-8", true, doctype)
   }
 
   def savePDF() {
     saveHTML()
-    (new PDFMaker(htmlFilename)).createPDF(pdfFilename)
+    (new PDFMaker(filename("html"))).createPDF(filename("pdf"))
   }
   
   override def toString = {

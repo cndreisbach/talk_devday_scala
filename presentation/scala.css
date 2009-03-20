@@ -28,16 +28,9 @@ li {
     margin-bottom: 0.5em;
 }
 
-pre {
+pre, code {
     font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
 }
-
-div#header, div#footer {  color: silver; }
-#currentSlide { color: silver;}
-#controls #navLinks a { color: silver; }
-.step { color: gray; }
-/* or hide next steps e.g.  .step { visibility: hidden; } */
-.stepcurrent { color: yellow; }
 
 #slide1 {
     text-align: right;
@@ -51,15 +44,6 @@ div#header, div#footer {  color: silver; }
 #slide1 p {
     margin: 0;
     padding: 0;
-}
-
-pre.code, .hll, .highlight {
-    background-color: #ffffcc;
-    color: black;
-    padding: 5px 10px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    background-color: #E2FFA8;
 }
 
 .c { color: #808080 } /* Comment */
@@ -122,6 +106,13 @@ pre.code, .hll, .highlight {
 .vg { color: #d07000; font-weight: bold } /* Name.Variable.Global */
 .vi { color: #3030B0 } /* Name.Variable.Instance */
 .il { color: #0000D0; font-weight: bold } /* Literal.Number.Integer.Long */
+
+div#header, div#footer {  color: silver; }
+#currentSlide { color: silver;}
+#controls #navLinks a { color: silver; }
+.step { color: gray; }
+/* or hide next steps e.g.  .step { visibility: hidden; } */
+.stepcurrent { color: yellow; }
 
 
 

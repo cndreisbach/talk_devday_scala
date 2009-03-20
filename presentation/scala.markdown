@@ -53,9 +53,37 @@ across the back of the john
 Most of Scala isn't jarring.
 
 * No class or static attributes or methods
+* No primitives
 * No obvious constructors
+* No ternary operator
 * Syntax is close to what you're used to, but not close enough
 * Relies on another language (Java) for much of its standard library
+
+---
+
+# Scala is a scripting language
+
+* REPL
+* Light ceremony
+* Type inference
+* DSL-able syntax
+
+---
+
+# Light ceremony in the REPL
+
+<pre class="brush:scala code">
+scala> var pets = Map("dogs" -> List("Charlie", "Eli"), "cats" -> List("Violet"))
+pets: scala.collection.immutable.Map[java.lang.String,List[java.lang.String]] = Map(dogs -> List(Charlie, Eli), cats -> List(Violet))
+
+scala> pets("dogs").first                                                        
+res2: java.lang.String = Charlie
+
+scala> pets += ("unicorns" -> List("Spartacus"))
+
+scala> pets
+res5: scala.collection.immutable.Map[java.lang.String,List[java.lang.String]] = Map(dogs -> List(Charlie, Eli), cats -> List(Violet), unicorns -> List(Spartacus))
+</pre>
 
 ---
 
@@ -67,9 +95,22 @@ Only non-obvious cases need explicit typing.
 
 ---
 
-# Type inference doesn't work with recursion
+# Running a script
 
-<pre class="brush:scala" src="../slider/src/main/scala/Slide.scala" section="recursive" />
+<pre class="brush:scala" src="src/scripts/encrypt.scala" />
+
+---
+
+# Syntax made for DSLs
+
+Methods can be called in one of two ways:
+
+* `object.method(argument)`
+* `object method argument`
+
+Everything's a object, so this is how arithmetic works.
+
+NEED EXAMPLE
 
 ---
 
@@ -81,9 +122,61 @@ Only non-obvious cases need explicit typing.
 * Tail recursion
 * Lists
 * Pattern matching
-+ Currying
 + For comprehensions
 + Lazy values
+
+---
+
+# Immutability
+
+<pre class="brush:scala" src="../slider/src/main/scala/Slideshow.scala" section="immutability" />
+
+* `val` and `var` are used to declare variables
+* `val` = immutable value
+* `var` = mutable variable
+
+Immutable variables simplify concurrency tremendously. I find they help me
+eliminate bugs, as well.
+
+---
+
+# First-class functions
+
+<pre class="brush:scala" src="../slider/src/main/scala/Slideshow.scala" section="functions" />
+
+The benefit of first-class functions cannot be emphasized enough. Functions are objects, complete with literal syntax and the ability to be returned from other functions.
+
+This is what makes Ruby, JavaScript, and Scheme awesome (among other things.)
+
+---
+
+# Tail recursion
+
+<pre class="brush:scala" src="src/main/scala/Recursor.scala" />
+
+---
+
+# Tail recursion, tested
+
+<pre class="brush:scala" src="src/test/scala/RecursorTest.scala" />
+
+---
+
+# Pattern matching
+
+Pattern matching is the `case` statement bitten by a radioactive lambda.
+
+Pattern matching on tests:
+
+<pre class="brush:scala" src="../slider/src/main/scala/OptionParser.scala" section="matching" />
+
+---
+
+# Pattern matching
+
+Pattern matching on equivalence:
+
+<pre class="brush:scala" src="../slider/src/main/scala/Slide.scala" section="matching" />
 
 ---
 
@@ -103,6 +196,7 @@ Only non-obvious cases need explicit typing.
 
 # Other topics
 
+* The ecosystem
 * How does Scala interact with other JVM languages?
 * XML Literals
 + What is ScalaCheck?
