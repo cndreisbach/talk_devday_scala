@@ -8,7 +8,8 @@
  .layout { display: block; }
  .notes  { display: none; } /* handout notes/note (use note? handout? notes? */
   
-  #header, #footer, .slide { width: 100%; top: 0; left: 0; }
+  #header, .slide { width: 100%; top: 0; left: 0; }
+  #footer { top: 0; left: 0; }
   #header { top: 0; height: 0.5em; z-index: 1;}
   
   #footer { top: auto; bottom: 0; height: 1em; z-index: 5;}

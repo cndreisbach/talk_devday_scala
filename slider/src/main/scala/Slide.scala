@@ -30,7 +30,10 @@ class Slide(slideshow: Slideshow, text: String) {
   private def includeCode(code: Node) = {
     val src = code attribute "src"
     val section = code attribute "section"
-    <pre class={codeClass(code attribute "class")}>{ codeText(src, section) }</pre>
+    <div class="include_code">
+      <pre class={codeClass(code attribute "class")}>{ codeText(src, section) }</pre>
+      <a class="code_link" href={ "txmt://open?url=file://" + codeSrc(src) }>source</a>
+    </div>
   }
 
   private def codeClass(htmlClass: Option[Seq[Node]]) = {

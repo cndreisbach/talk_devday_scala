@@ -32,6 +32,13 @@ pre, code {
     font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
 }
 
+.include_code a.code_link {
+  font-size: 50%;
+  margin: 2px 0;
+  padding: 0;
+  display: block;
+}
+
 #slide1 {
     text-align: right;
     font-size: 150%;

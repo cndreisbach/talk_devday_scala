@@ -250,14 +250,75 @@ Traits are like both Java interfaces and Ruby mixin modules. They can contain bo
 
 ---
 
-# Other topics
+# Scala is a concurrent language
 
-* The ecosystem
-* How does Scala interact with other JVM languages?
-* XML Literals
-+ What are case classes?
-+ What is combinator parsing?
-+ What is ScalaCheck?
-* What are actors and messages?
-* How do actors and messages help with concurrency?
-* Could you show me this with an example?
+* The concurrency model resembles Erlang's
+* Actor-based concurrency
+* Still allows Java-like thread-based concurrency
+
+In Scala, actors pass messages to one another. These messages go into a queue to be handled later.
+
+Messages are sent via the `!` function: `actor ! "message"`
+
+Messages are received via the `receive` or `react` methods.
+
+---
+
+# Elevator example
+
+This is how you would traditionally use concurrency in Java or most other languages.
+
+<pre class="brush:scala" src="src/main/scala/elevator/threads/Floor.scala" section="threads"></pre>
+
+---
+
+# Actors on the elevator
+
+Passenger sends a message to the floor:
+
+<pre class="brush:scala" src="src/main/scala/elevator/actors/Passenger.scala" section="actors"></pre>
+
+---
+
+# Actors on the elevator
+
+Floor reacts to the message:
+
+<pre class="brush:scala" src="src/main/scala/elevator/actors/Floor.scala" section="actors"></pre>
+
+---
+
+# Scala is a modern language
+
+* Great ecosystem
+* Supportive of polyglot programming
+* Scales to appropriate complexity
+* XML literals
+* Great documentation and learning resources
+* Decent libraries (Lift, scalaz, scalax, every Java library)
+* Buildr
+
+---
+
+# Conclusion
+
+Pros:
+
+* Interoperability
+* Scalability
+* Beauty, subjectively
+
+Cons:
+
+* JVM, if you don't like that
+* Small user base
+* No killer framework/library
+
+---
+
+# Resources
+
+* [crnixon.org/talks](http://crnixon.org/talks)
+* [speakerrate.com/events/64-developer-day](http://speakerrate.com/events/64-developer-day)
+* [delicious.com/crnixon/devday+scala](http://delicious.com/crnixon/devday+scala)
+* [github.com/crnixon/devday](http://github.com/crnixon/devday)
