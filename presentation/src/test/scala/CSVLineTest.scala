@@ -1,6 +1,7 @@
 import org.scalatest._
 import org.scalatest.matchers._
 
+// START test
 class CSVLineTest extends FunSuite with ShouldMatchers {
   test("A CSVLine should split up a string") {
     val strings = List("a", "b", "c")
@@ -8,3 +9,4 @@ class CSVLineTest extends FunSuite with ShouldMatchers {
     csvline.size should equal (strings.size)
   }
 }
+// END test

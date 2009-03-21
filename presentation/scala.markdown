@@ -10,10 +10,9 @@ Viget Labs
 
 * Created in 2001 by Martin Odersky
 * Runs on the JVM
-* Everything's an object
-* But it's a functional language
 * Compiled beforehand or just-in-time
-* Static typing with inference
+* It's a functional language
+* But everything's an object
 * Actor-based concurrency
 
 ---
@@ -98,6 +97,16 @@ Only non-obvious cases need explicit typing.
 # Running a script
 
 <pre class="brush:scala" src="src/scripts/encrypt.scala"></pre>
+
+---
+
+# Light syntax
+
+* Type inference
+* Semicolon inference
+* Case classes give syntax like list and hashmap literals
+* Parameter-less methods called like object values (`Foo.count` instead of `Foo.count()`)
+* Closures used like Ruby blocks
 
 ---
 
@@ -195,16 +204,49 @@ Pattern matching on equivalence:
 * Classes and instances
 * Stand-alone objects
 * Companion objects
-* Selective mutability
-* Parameter-less methods
+* Selective immutability
 * Abstract classes
 * Traits
 
 ---
 
-# Stand-alone objects
+# Stand-alone and companion objects
 
 <pre class="brush:scala" src="../slider/src/main/scala/Slideshow.scala" section="object"></pre>
+
+---
+
+# Data structures
+
+Most data structures are available in immutable and mutable flavors, and do the intelligent thing with similar methods.
+
+<pre class="brush:scala">
+scala> val mutableMap = scala.collection.mutable.Map("Durham" -> "awesome")
+
+scala> mutableMap.update("Columbus", "not so great")                           
+
+scala> mutableMap
+res7: scala.collection.mutable.Map[java.lang.String,java.lang.String] = Map(Columbus -> not so great, Durham -> awesome)
+
+scala> val immutableMap = scala.collection.immutable.Map("Durham" -> "awesome")
+
+scala> immutableMap.update("Columbus", "not so great")                         
+res8: scala.collection.immutable.Map[java.lang.String,java.lang.String] = Map(Durham -> awesome, Columbus -> not so great)
+</pre>
+
+---
+
+# Traits
+
+<pre class="brush:scala" src="src/test/scala/CSVLineTest.scala" section="test"></pre>
+
+Traits are like both Java interfaces and Ruby mixin modules. They can contain both concrete and abstract values and methods.
+
+---
+
+# Multiple traits and traits at instantiation
+
+<pre class="brush:scala" src="src/scripts/dogs.scala"></pre>
 
 ---
 
@@ -213,10 +255,9 @@ Pattern matching on equivalence:
 * The ecosystem
 * How does Scala interact with other JVM languages?
 * XML Literals
-+ What is ScalaCheck?
-* Why is Scala good for writing DSLs? (df format now)
 + What are case classes?
 + What is combinator parsing?
++ What is ScalaCheck?
 * What are actors and messages?
 * How do actors and messages help with concurrency?
 * Could you show me this with an example?
