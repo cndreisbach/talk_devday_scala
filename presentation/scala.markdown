@@ -20,7 +20,7 @@ Viget Labs
 
 # Hello world
 
-<pre class="code brush:scala" src="src/main/scala/HiThere.scala" />
+<pre class="code brush:scala" src="src/main/scala/HiThere.scala"></pre>
 
 ---
 
@@ -53,7 +53,7 @@ across the back of the john
 Most of Scala isn't jarring.
 
 * No class or static attributes or methods
-* No primitives
+* No primitives; everything is an object
 * No obvious constructors
 * No ternary operator
 * Syntax is close to what you're used to, but not close enough
@@ -89,7 +89,7 @@ res5: scala.collection.immutable.Map[java.lang.String,List[java.lang.String]] = 
 
 # Type inference
 
-<pre class="brush:scala" src="src/main/scala/CSVLine.scala" />
+<pre class="brush:scala" src="src/main/scala/CSVLine.scala"></pre>
 
 Only non-obvious cases need explicit typing.
 
@@ -97,7 +97,7 @@ Only non-obvious cases need explicit typing.
 
 # Running a script
 
-<pre class="brush:scala" src="src/scripts/encrypt.scala" />
+<pre class="brush:scala" src="src/scripts/encrypt.scala"></pre>
 
 ---
 
@@ -110,7 +110,17 @@ Methods can be called in one of two ways:
 
 Everything's a object, so this is how arithmetic works.
 
-NEED EXAMPLE
+---
+
+# An object created to make a DSL
+
+<pre class="brush:scala" src="src/main/scala/Trip.scala" section="dsl"></pre>
+
+---
+
+# The DSL at work
+
+<pre class="brush:scala" src="src/test/scala/TripTest.scala" section="dsltest"></pre>
 
 ---
 
@@ -129,7 +139,7 @@ NEED EXAMPLE
 
 # Immutability
 
-<pre class="brush:scala" src="../slider/src/main/scala/Slideshow.scala" section="immutability" />
+<pre class="brush:scala" src="../slider/src/main/scala/Slideshow.scala" section="immutability"></pre>
 
 * `val` and `var` are used to declare variables
 * `val` = immutable value
@@ -142,7 +152,7 @@ eliminate bugs, as well.
 
 # First-class functions
 
-<pre class="brush:scala" src="../slider/src/main/scala/Slideshow.scala" section="functions" />
+<pre class="brush:scala" src="../slider/src/main/scala/Slideshow.scala" section="functions"></pre>
 
 The benefit of first-class functions cannot be emphasized enough. Functions are objects, complete with literal syntax and the ability to be returned from other functions.
 
@@ -152,13 +162,13 @@ This is what makes Ruby, JavaScript, and Scheme awesome (among other things.)
 
 # Tail recursion
 
-<pre class="brush:scala" src="src/main/scala/Recursor.scala" />
+<pre class="brush:scala" src="src/main/scala/Recursor.scala"></pre>
 
 ---
 
 # Tail recursion, tested
 
-<pre class="brush:scala" src="src/test/scala/RecursorTest.scala" />
+<pre class="brush:scala" src="src/test/scala/RecursorTest.scala"></pre>
 
 ---
 
@@ -168,7 +178,7 @@ Pattern matching is the `case` statement bitten by a radioactive lambda.
 
 Pattern matching on tests:
 
-<pre class="brush:scala" src="../slider/src/main/scala/OptionParser.scala" section="matching" />
+<pre class="brush:scala" src="../slider/src/main/scala/OptionParser.scala" section="matching"></pre>
 
 ---
 
@@ -176,7 +186,7 @@ Pattern matching on tests:
 
 Pattern matching on equivalence:
 
-<pre class="brush:scala" src="../slider/src/main/scala/Slide.scala" section="matching" />
+<pre class="brush:scala" src="../slider/src/main/scala/Slide.scala" section="matching"></pre>
 
 ---
 
@@ -189,8 +199,12 @@ Pattern matching on equivalence:
 * Parameter-less methods
 * Abstract classes
 * Traits
-* No primitives
-+ Generics
+
+---
+
+# Stand-alone objects
+
+<pre class="brush:scala" src="../slider/src/main/scala/Slideshow.scala" section="object"></pre>
 
 ---
 

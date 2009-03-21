@@ -36,7 +36,7 @@ define 'devday' do
       $:.push(project('slider')._('target/classes'))
       
       %w(OptionDefinition *OptionDefinition OptionParser 
-          Slide Slideshow Slider PDFMaker).each do |prefix|
+          Slide Slideshow PDFMaker).each do |prefix|
         Dir[project('slider')._("target/classes/#{prefix}*.class")].each do |java_class|
           require File.basename(java_class, ".class")
         end

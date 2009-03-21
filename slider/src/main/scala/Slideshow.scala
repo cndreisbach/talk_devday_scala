@@ -5,7 +5,21 @@ import scala.xml.dtd._
 import org.apache.commons.io.FilenameUtils
 import javax.xml.parsers.{DocumentBuilder,DocumentBuilderFactory}
 
+// START object
+object Slideshow {
+  val doctype = DocType("html", 
+                        PublicID("-//W3C//DTD XHTML 1.0 Strict//EN",
+                                 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"), Nil)
+  
+  def create(filename: String) {
+    val slideshow = new Slideshow(filename)
+    slideshow.saveHTML()
+  }
+}
+
 class Slideshow(file: String) {
+  // END object
+
   // START immutability
   val basename = FilenameUtils.getBaseName(file)
   val path = FilenameUtils.getFullPath(file)
@@ -16,15 +30,11 @@ class Slideshow(file: String) {
     (text) => new Slide(this, text))
   // END functions
 
-  val doctype = DocType("html", 
-                        PublicID("-//W3C//DTD XHTML 1.0 Strict//EN",
-                                 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"), Nil)
-
   def filename(ext: String) = FilenameUtils.concat(path, basename + "." + ext)
   def title = (slides(0).toXML \ "h1").text
 
   def saveHTML() {
-    scala.xml.XML.saveFull(filename("html"), toHTML, "UTF-8", true, doctype)
+    scala.xml.XML.saveFull(filename("html"), toHTML, "UTF-8", true, Slideshow.doctype)
   }
 
   def savePDF() {
