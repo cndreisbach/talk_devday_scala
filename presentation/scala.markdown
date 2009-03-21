@@ -311,6 +311,7 @@ Pros:
 Cons:
 
 * JVM, if you don't like that
+* If you don't know Java, the libraries are hard to navigate
 * Small user base
 * No killer framework/library
 
