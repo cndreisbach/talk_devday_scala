@@ -1,0 +1,22 @@
+<html>
+<head>
+  <title>Make a PDF</title>
+</head>
+<body>
+  <h1>Upload a Markdown file</h1>
+  <form action="." method="POST" enctype="multipart/form-data">
+    <input type="file" name="markdown_doc" />
+    <input type="submit" />
+  </form>
+  
+  <% unless @pdfs.empty? %>
+    <h2>Files converted</h2>
+    <ul>
+    <% @pdfs.each do |pdf| %>
+      <li><a href="pdf/<%= pdf %>"><%= pdf %></a></li>
+    <% end %>
+    </ul>
+  <% end %>
+</body>
+</html>
+  

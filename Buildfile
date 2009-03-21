@@ -14,7 +14,7 @@ define 'devday' do
   
   desc 'Presentation'
   define 'presentation' do
-    compile.with SCALATEST, SCALACHECK
+    compile.with SCALATEST, SCALACHECK, SCALALIB
 
     build do
       load_dependencies

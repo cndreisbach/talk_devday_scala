@@ -3,35 +3,41 @@ require 'sinatra'
 require 'erb'
 require 'maruku'
 
-ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+ROOT = File.expand_path(File.dirname(__FILE__))
 $:.push ROOT
 
 include Java
 
-require "/usr/local/share/scala/lib/scala-library.jar"
-Dir[ROOT + '/pdf_maker/target/fs/*.jar'].each do |jar|
-  require jar
+[ '~/.m2/repository/org/scala-lang/**/*.jar',
+  '~/.m2/repository/com/lowagie/**/*.jar',
+  '~/.m2/repository/org/xhtmlrenderer/**/*.jar'].each do |splat_path|
+  Dir[File.expand_path(splat_path)].each do |jar|
+    p jar
+    require jar
+  end
 end
 
-Dir[ROOT + '/pdf_maker/target/classes/*.class'].each do |java_class|
-  require File.join(File.dirname(java_class), File.basename(java_class, ".class"))
+$:.push(ROOT + '/../../../../../slider/target/classes/')
+
+Dir[ROOT + '/../../../../../slider/target/classes/PDFMaker*.class'].each do |java_class|
+  p File.basename(java_class, '.class')
+  require File.basename(java_class, '.class')
 end
 
 
 get '/' do
-  @pdfs = Dir[ROOT + '/pdf_server/public/pdf/*.pdf'].map { |fn| File.basename(fn) }
+  @pdfs = Dir[ROOT + '/public/pdf/*.pdf'].map { |fn| File.basename(fn) }
   render :erb, :index
 end
 
 post '/' do
-  dir = ROOT + "/pdf_server"
   md_filename = params[:markdown_doc][:filename]
   basename = File.basename(md_filename, File.extname(md_filename))
-  html_filename = dir + "/public/html/#{basename}.html"
-  pdf_filename = dir + "/public/pdf/#{basename}.pdf"
+  html_filename = ROOT + "/public/html/#{basename}.html"
+  pdf_filename = ROOT + "/public/pdf/#{basename}.pdf"
   
-  FileUtils.mkdir_p(dir + '/public/html')
-  FileUtils.mkdir_p(dir + '/public/pdf')
+  FileUtils.mkdir_p(ROOT + '/public/html')
+  FileUtils.mkdir_p(ROOT + '/public/pdf')
 
   md = Maruku.new(params[:markdown_doc][:tempfile].read)
 
