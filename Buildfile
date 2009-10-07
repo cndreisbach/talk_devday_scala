@@ -8,6 +8,7 @@ repositories.remote << "http://scala-tools.org/repo-releases"
 repositories.remote << "http://www.familie-kneissl.org/repo-releases"
 
 SCALALIB = { :group => 'org.scala-lang', :id => 'scala-library', :version => '2.7.3' }
+SCALACOMP = { :group => 'org.scala-lang', :id => 'scala-compiler', :version => '2.7.3' }
 SCALATEST = { :group => 'org.scala-tools.testing', :id => 'scalatest', :version => '0.9.5' }
 SCALACHECK = { :group => 'org.scala-tools.testing', :id => 'scalacheck', :version => '1.5' }
 SPECS = { :group => 'org.scala-tools.testing', :id => 'specs', :version => '1.4.3' }
@@ -23,7 +24,7 @@ define 'devday' do
 
   desc 'Slideshow creator'
   define 'slider' do
-    compile.with MARKDOWNJ, COMMONS_IO, FLYING_SAUCER, ITEXT
+    compile.with SCALACOMP, SCALALIB, MARKDOWNJ, COMMONS_IO, FLYING_SAUCER, ITEXT
   end
   
   desc 'Presentation'
