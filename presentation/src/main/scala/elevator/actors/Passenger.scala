@@ -1,9 +1,10 @@
 package elevator.actors
 
 import scala.actors._
+import scala.util.Random
 
 // START actors
-class Passenger(building: Building, passengerNum: int) extends Actor {
+class Passenger(building: Building, passengerNum: Int) extends Actor {
   def act() = {
     val generator = new Random(passengerNum)
     def pickFloor() = 

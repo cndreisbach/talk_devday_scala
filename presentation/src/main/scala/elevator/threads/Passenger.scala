@@ -1,8 +1,9 @@
 package elevator.threads
 
 import scala.actors._
+import scala.util.Random
 
-class Passenger(building: Building, passengerNum: int) extends Actor {
+class Passenger(building: Building, passengerNum: Int) extends Actor {
   val generator = new Random(passengerNum)
 
   def act() = {

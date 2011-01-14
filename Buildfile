@@ -7,11 +7,11 @@ repositories.remote << 'http://www.ibiblio.org/maven2'
 repositories.remote << "http://scala-tools.org/repo-releases"
 repositories.remote << "http://www.familie-kneissl.org/repo-releases"
 
-SCALALIB = { :group => 'org.scala-lang', :id => 'scala-library', :version => '2.7.3' }
-SCALACOMP = { :group => 'org.scala-lang', :id => 'scala-compiler', :version => '2.7.3' }
-SCALATEST = { :group => 'org.scala-tools.testing', :id => 'scalatest', :version => '0.9.5' }
-SCALACHECK = { :group => 'org.scala-tools.testing', :id => 'scalacheck', :version => '1.5' }
-SPECS = { :group => 'org.scala-tools.testing', :id => 'specs', :version => '1.4.3' }
+SCALALIB = { :group => 'org.scala-lang', :id => 'scala-library', :version => '2.8.1' }
+SCALACOMP = { :group => 'org.scala-lang', :id => 'scala-compiler', :version => '2.8.1' }
+SCALATEST = { :group => 'org.scalatest', :id => 'scalatest', :version => '1.2' }
+SCALACHECK = { :group => 'org.scala-tools.testing', :id => 'scalacheck_2.8.1', :version => '1.8' }
+SPECS = { :group => 'org.scala-tools.testing', :id => 'specs', :version => '1.6.7' }
 FLYING_SAUCER = { :group => 'org.xhtmlrenderer', :id => 'core-renderer', :version => 'R8pre2' }
 ITEXT = { :group => 'com.lowagie', :id => 'itext', :version => '2.0.8' }
 COMMONS_IO = { :group => 'commons-io', :id => 'commons-io', :version => '1.4' }

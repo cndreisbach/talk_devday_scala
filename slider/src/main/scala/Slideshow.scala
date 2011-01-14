@@ -24,9 +24,9 @@ class Slideshow(file: String) {
   val basename = FilenameUtils.getBaseName(file)
   val path = FilenameUtils.getFullPath(file)
   // END immutability
-  val slideText = Source.fromFile(file).getLines.toList.reduceLeft((a, b) => a + b)
+  val slideText = Source.fromFile(file).getLines.toList.reduceLeft((a, b) => a + b + "\n")
   // START functions
-  val slides = slideText.split("[\r\n]+---+[\r\n]+").map(
+  val slides = slideText.split("[\\r\\n]+---+[\\r\\n]+").map(
     (text) => new Slide(this, text))
   // END functions
 

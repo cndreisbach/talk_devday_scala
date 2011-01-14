@@ -4,7 +4,7 @@ import scala.actors._
 import scala.actors.Actor._
 
 // START actors
-class Floor(floorNum: int) extends Actor {
+class Floor(floorNum: Int) extends Actor {
   private var passengersWaitingToGetOn = List[(Passenger, Floor)]()
   private var passengersWaitingToGetOff = List[Passenger]()
   

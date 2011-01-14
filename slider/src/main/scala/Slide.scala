@@ -52,11 +52,11 @@ class Slide(slideshow: Slideshow, text: String) {
     require(src.isDefined)
 
     // TODO remove minimum whitespace
-    val text = Source.fromFile(codeSrc(src)).getLines.toList.reduceLeft((a, b) => a + b)
+    val text = Source.fromFile(codeSrc(src)).getLines.toList.reduceLeft((a, b) => a + b + "\n")
 
     if (section.isDefined) {
       text.split(
-        "[\r\n]+[^\r\n]*START " + section.get.toString + "[^\r\n]*[\r\n]+", 2
+        "[\r\n]*[^\r\n]*START " + section.get.toString + "[^\r\n]*[\r\n]+", 2
       )(1).split(
         "[\r\n]+[^\r\n]*END " + section.get.toString + "[^\r\n]*[\r\n]+", 2
       )(0)

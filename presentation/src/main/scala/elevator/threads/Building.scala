@@ -1,6 +1,6 @@
 package elevator.threads
 
-class Building(floorCount: int, passengerCount: int) {
+class Building(floorCount: Int, passengerCount: Int) {
   val floors = new Array[Floor](floorCount)
   val passengers = new Array[Passenger](passengerCount)
 
